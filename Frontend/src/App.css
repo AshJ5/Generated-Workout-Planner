@@ -5,6 +5,72 @@
   text-align: center;
 }
 
+/* Navigation Bar Styles */
+.navbar {
+  background-color: #333;
+  padding: 0;
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #170775;
+}
+
+.nav-links a.active {
+  background-color: #ff6464;
+  color: white;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home-page {
+  background-image: url('./assets/background.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: -2rem -2rem 0 -2rem;
+}
+
+.form-container textarea {
+  margin-bottom: 0.5rem;
+}
+
+.form-container button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -31,6 +97,14 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+.about-photo {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card {
