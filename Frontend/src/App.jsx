@@ -47,7 +47,7 @@ function App() {
         <div className="home-page">
           <h2>Enter your workout details:</h2>
           <div className="form-container">
-            <textarea onChange={(event)=>{handleChange(event)}} rows="3" cols="30"></textarea>
+            <textarea onChange={(event)=>{handleChange(event)}} rows="2" cols="30"></textarea>
             <button onClick={()=>{sendMessage()}}> Submit! </button>
           </div>
         </div>
