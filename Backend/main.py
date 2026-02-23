@@ -32,11 +32,11 @@ def read_root():
 
 @app.post("/generate")
 def generate_workout(req: WorkoutRequest):
-    messages = [{"role": "user", "content": req.prompt, "source": "C:\\Users\\Student-35\\Downloads\\Generated-Workout-Planner\\megaGymDataset.csv"}]
+    messages = [{"role": "user", "content": req.prompt, "file": "Backend\cardioActivities.csv"}]
     response = ollama.chat(
         model="llama3:8b",
         messages=messages
     )
     return {"response": response}
 
-print(generate_workout(WorkoutRequest(prompt="Create a workout plan for a bodybuilder.")))
+print(generate_workout(WorkoutRequest(prompt="Create a workout to jump higher.")))
