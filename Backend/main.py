@@ -12,8 +12,8 @@ class WorkoutRequest(BaseModel):
 
 # 👇 Allowed origins (Vite default dev URL)
 origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 app.add_middleware(
@@ -30,13 +30,13 @@ app.add_middleware(
 def read_root():
     return {"Workout": "World"}
 
-@app.post("/generate")
+@app.post("/workout")
 def generate_workout(req: WorkoutRequest):
-    messages = [{"role": "user", "content": req.prompt, "file": "Backend\cardioActivities.csv"}]
+    messages = [{"role": "user", "content": req.prompt, "file": "Backend\\cardioActivities.csv"}]
     response = ollama.chat(
         model="llama3:8b",
         messages=messages
     )
     return {"response": response}
 
-print(generate_workout(WorkoutRequest(prompt="Create a workout to jump higher.")))
+#print(generate_workout(WorkoutRequest(prompt="Create a workout to jump higher.")))

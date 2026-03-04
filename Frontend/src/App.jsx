@@ -12,23 +12,26 @@ function App() {
   const handleChange = (event)=>{
     setMessage(event.target.value)
   }
-  const sendMessage = async ()=>{
-    let response = await fetch("http://localhost:3000/workout",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({"message": message})
-        
-      }
-    )
+  const sendMessage = async () => {
+    // send to backend server running on port 3000
+    const response = await fetch("http://localhost:3000/workout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: message }),
+    });
 
-    let data = await response.json()
-    console.log(data)
+    const data = await response.json();
+    console.log(data);
   }
+
+  const API = "http://localhost:3000/workout"
+  fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: "" }),
+    })
 
   return (
     <div>
