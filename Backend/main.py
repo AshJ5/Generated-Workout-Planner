@@ -33,8 +33,8 @@ def read_root():
 @app.post("/workout")
 def generate_workout(req: WorkoutRequest):
     messages = [{"role": "user", "content": req.prompt, "file": "Backend\\cardioActivities.csv"}]
-    response = ollama.chat(
-        model="llama3:8b",
+    response = ollama.chat(messages=messages, temperature=0.7, max_tokens=1000,
+        model="llama3.2:1b",
         messages=messages
     )
     return {"response": response.message.content}
