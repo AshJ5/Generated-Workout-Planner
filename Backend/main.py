@@ -12,8 +12,8 @@ class WorkoutRequest(BaseModel):
 
 # 👇 Allowed origins (Vite default dev URL)
 origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(
@@ -37,6 +37,4 @@ def generate_workout(req: WorkoutRequest):
         model="llama3:8b",
         messages=messages
     )
-    return {"response": response}
-
-#print(generate_workout(WorkoutRequest(prompt="Create a workout to jump higher.")))
+    return {"response": response.message.content}

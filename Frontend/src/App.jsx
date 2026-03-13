@@ -1,43 +1,44 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import me from './me.jpg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [message, setMessage] = useState('')
+  const [result, setResult] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState('home')
 
   const handleChange = (event)=>{
     setMessage(event.target.value)
   }
   const sendMessage = async () => {
-    // send to backend server running on port 3000
-    const response = await fetch("http://localhost:3000/workout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt: message }),
-    });
+    setIsLoading(true)
+    setResult(null)
 
-    const data = await response.json();
-    console.log(data);
+    try {
+      const response = await fetch("http://localhost:3000/workout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: message }),
+      })
+
+      const data = await response.json();
+      setResult(data.response)
+    } catch (error) {
+      setResult({ error: "Failed to fetch workout. Check the backend." })
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
-
-  const API = "http://localhost:3000/workout"
-  fetch(API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: "" }),
-    })
 
   return (
     <div>
       <div>
-        <h1>Working Out is a Lifestyle!</h1>
-        </div>
+        <h1><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=76C0C5&width=435&lines=Working+Out+is+a+Lifestyle!" alt="Typing SVG" /></a></h1>
+      </div>
       <nav className="navbar">
         <ul className="nav-links">
           <li><a onClick={() => setCurrentPage('home')} className={currentPage === 'home' ? 'active' : ''}>Home</a></li>
@@ -50,17 +51,38 @@ function App() {
         <div className="home-page">
           <h2>Enter your workout details:</h2>
           <div className="form-container">
-            <textarea onChange={(event)=>{handleChange(event)}} rows="2" cols="30"></textarea>
-            <button onClick={()=>{sendMessage()}}> Submit! </button>
+            <textarea
+              value={message}
+              onChange={(event) => handleChange(event)}
+              rows="3"
+              cols="40"
+              placeholder="e.g. 4-day push/pull split, dumbbells only"
+            />
+            <button onClick={() => sendMessage()} disabled={isLoading}>
+              {isLoading ? 'Generating…' : 'Submit!'}
+            </button>
           </div>
+
+          {result && (
+            <div className="result-box">
+              <h3>Your Workout</h3>
+              <pre>{typeof result === 'string' ? result : JSON.stringify(result, null, 2)}</pre>
+            </div>
+          )}
         </div>
       )}
 
       {currentPage === 'about' && (
         <div>
           <h1>About Us</h1>
-          <img src = {me} className="about-photo" alt="Workout" />
-          <p>This workout generator builds custom workouts that actually fit you—your goals, your schedule, and your gear. No more random routines or wasted time: every workout is designed to push you, progress you, and keep things fresh. Whether you’re chasing muscle, fat loss, or pure consistency, this generator turns “I should work out” into “let’s go.” 🔥</p>
+          <img src={me} className="about-photo" alt="Workout" />
+          <p>
+            This workout generator builds custom workouts that actually fit you—your goals,
+            your schedule, and your gear. No more random routines or wasted time: every
+            workout is designed to push you, progress you, and keep things fresh. Whether
+            you’re chasing muscle, fat loss, or pure consistency, this generator turns
+            “I should work out” into “let’s go.” 🔥
+          </p>
         </div>
       )}
 
