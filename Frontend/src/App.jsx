@@ -19,8 +19,8 @@ function App() {
       const response = await fetch("http://localhost:3000/workout", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", 
-          "Access-Control-Allow-Origin": "*"
+          "Content-Type": "application/json",
+          "Acess-Control-Allow-Origin": "*"
         },
         body: JSON.stringify({ prompt: message }),
       })
