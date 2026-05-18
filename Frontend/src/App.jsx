@@ -38,8 +38,10 @@ function App() {
   return (
     <div>
       <div>
-        <h1><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=76C0C5&width=435&lines=Working+Out+is+a+Lifestyle!" alt="Typing SVG" /></a></h1>
+        <h1>Workout Centre</h1>
+        <h3>"🏋️ Transform Your Health, Transform Your Life"</h3>
       </div>
+    <br/>
       <nav className="navbar">
         <ul className="nav-links">
           <li><a onClick={() => setCurrentPage('home')} className={currentPage === 'home' ? 'active' : ''}>Home</a></li>
@@ -65,9 +67,15 @@ function App() {
           </div>
 
           {result && (
-            <div className="result-box">
-              <h3>Your Workout</h3>
-              <pre>{typeof result === 'string' ? result : JSON.stringify(result, null, 2)}</pre>
+            <div className="results-container">
+              <div className="result-box">
+                <h3>Your Workout</h3>
+                <pre>{typeof result === 'string' ? result.split('Additional Tips:')[0].replace('Workout:', '').trim() : JSON.stringify(result, null, 2)}</pre>
+              </div>
+              <div className="tips-box">
+                <h3>Additional Tips</h3>
+                <pre>{typeof result === 'string' && result.includes('Additional Tips:') ? result.split('Additional Tips:')[1].trim() : 'No additional tips provided.'}</pre>
+              </div>
             </div>
           )}
         </div>

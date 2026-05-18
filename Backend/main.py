@@ -31,7 +31,7 @@ def read_root():
 
 @app.post("/workout")
 def generate_workout(req: WorkoutRequest):
-    system_content = f"You are a helpful personal training assistant. You give short responses to user questions and design simple workouts. Use the following cardio activities data if relevant"
+    system_content = f"You are a helpful personal training assistant. You give short responses to user questions and design simple workouts. Use the following cardio activities data if relevant. Always format your response as:\n\nWorkout:\n[Provide the workout plan here]\n\nAdditional Tips:\n[Provide additional tips, advice, or notes here]"
     messages = [
         {"role": "system", "content": system_content},
         {"role": "user", "content": req.prompt}
